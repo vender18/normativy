@@ -9,6 +9,9 @@
 <meta name="theme-color" content="#f6f6f3" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)">
 <title>Нормативы</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
 <style>
 :root{
   --bg:#f6f6f3; --card:#ffffff; --text:#1a1a1a; --muted:#6b6b66; --line:#e4e4de;
@@ -113,7 +116,7 @@ footer{color:var(--muted);font-size:12px;margin-top:24px;text-align:center}
     <div class="next" id="next"></div>
   </div>
 
-  <footer>По таблицам школы: 1–4 кл. (Лях, Зданевич), 5–11 кл. Цифры — как в таблицах.</footer>
+  <footer>По таблицам школы: 1–4 кл. (Лях, Зданевич), 5–11 кл. Цифры — как в таблицах. Работает без интернета.</footer>
 </div>
 
 <script>
@@ -397,6 +400,10 @@ $('val').addEventListener('input', compute);
 $('val').addEventListener('keydown', ev => { if (ev.key === 'Enter') ev.target.blur(); });
 
 renderClasses(); renderGender(); renderList();
+
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
 </script>
 </body>
 </html>
